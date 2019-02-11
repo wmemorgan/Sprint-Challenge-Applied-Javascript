@@ -4,49 +4,49 @@ class Carousel {
         this.buttons = carousel.querySelectorAll('div')
         this.leftButton = carousel.querySelector('.left-button')
         this.rightButton = carousel.querySelector('.right-button')
-        
-
+        this.imageArr = Array.from(carousel.querySelectorAll('img'))
+   
         this.leftButton.addEventListener('click', () => this.goBack())
         this.rightButton.addEventListener('click', () => this.goForward())
     }
 
+    getDisplayIndex (num=0) {
+
+        for (let i = 0; i < this.imageArr.length; i++) {
+            if(window.getComputedStyle(this.imageArr[i], null).display === 'block') {
+                this.displayIndex = i
+                this.imageArr[i].style.display = 'none'
+            }
+        }
+
+        if ((this.displayIndex + num) >  (this.imageArr.length -1)) {
+            this.displayIndex = 0
+        } else if ((this.displayIndex + num) < 0) {
+            this.displayIndex = this.imageArr.length - 1
+        } else {
+            this.displayIndex = this.displayIndex + num
+        } 
+
+        this.imageArr[this.displayIndex].style.display = 'block'
+    }
+
+
+
     goForward () {
+        this.getDisplayIndex(1)
         
-        this.images = carousel.querySelectorAll('img').forEach((image, index) => {
-            let displayedImageIndex = carousel.querySelectorAll('.img').filter((image, index) => {
-                image.style.display === 'block'
-                return index
-            })
-
-        })
-
     }
 
     goBack () {
-
+        this.getDisplayIndex(-1)
     }
     
 }
 
-// class CarouselImage {
-//     constructor(image) {
-//         this.image = image
-//     }
-
-//     displayImage() {
-//         this.image.style.display = 'block'
-//     }    
-// }
 
 let carousel = document.querySelector('.carousel')
-// console.log(carousel)
 carousel.querySelector('img').style.display = 'block'
-let displayedImageIndex = carousel.querySelectorAll('img')
-
-console.log(displayedImageIndex)
-
-let imageDisplayStatus =  window.getComputedStyle(carousel.querySelector('img'), 'img:last-child').display
-//console.log(imageDisplayStatus)
+carousel = new Carousel(carousel)
 
 
 /* If You've gotten this far, you're on your own! Although we will give you some hints:
