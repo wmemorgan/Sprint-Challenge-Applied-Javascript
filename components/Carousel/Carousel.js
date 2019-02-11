@@ -10,7 +10,7 @@ class Carousel {
         this.rightButton.addEventListener('click', () => this.goForward())
     }
 
-    getDisplayIndex (num=0) {
+    getDisplayIndex (num=0, direction='left') {
 
         for (let i = 0; i < this.imageArr.length; i++) {
             if(window.getComputedStyle(this.imageArr[i], null).display === 'block') {
@@ -21,24 +21,40 @@ class Carousel {
 
         if ((this.displayIndex + num) >  (this.imageArr.length -1)) {
             this.displayIndex = 0
+            console.log(this.displayIndex)
         } else if ((this.displayIndex + num) < 0) {
             this.displayIndex = this.imageArr.length - 1
+            console.log(this.displayIndex)
         } else {
             this.displayIndex = this.displayIndex + num
+            console.log(this.displayIndex)
         } 
 
-        this.imageArr[this.displayIndex].style.display = 'block'
+        if (direction == 'right') {
+            this.imageArr[this.displayIndex].style.display = 'block'
+            this.imageArr[this.displayIndex].style.left = 'initial'
+            this.imageArr[this.displayIndex].style.right = '-100%'
+            this.imageArr[this.displayIndex].style.animation = 'slideRight 0.5s forwards'
+
+        } else {
+            this.imageArr[this.displayIndex].style.display = 'block'
+            this.imageArr[this.displayIndex].style.right = 'initial'
+            this.imageArr[this.displayIndex].style.left = '-100%'
+            this.imageArr[this.displayIndex].style.animation = 'slide 0.5s forwards'
+        }
+        
     }
 
 
 
     goForward () {
-        this.getDisplayIndex(1)
+
+        this.getDisplayIndex(1,'left')
         
     }
 
     goBack () {
-        this.getDisplayIndex(-1)
+        this.getDisplayIndex(-1,'right')
     }
     
 }
