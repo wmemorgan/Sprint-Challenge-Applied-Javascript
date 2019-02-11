@@ -21,13 +21,10 @@ class Carousel {
 
         if ((this.displayIndex + num) >  (this.imageArr.length -1)) {
             this.displayIndex = 0
-            console.log(this.displayIndex)
         } else if ((this.displayIndex + num) < 0) {
             this.displayIndex = this.imageArr.length - 1
-            console.log(this.displayIndex)
         } else {
             this.displayIndex = this.displayIndex + num
-            console.log(this.displayIndex)
         } 
 
         if (direction == 'right') {
