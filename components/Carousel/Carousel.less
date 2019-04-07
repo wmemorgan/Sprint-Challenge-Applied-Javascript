@@ -17,6 +17,7 @@
     position: absolute;
     width: 50px;
     height: 50px;
+    z-index: 5;
     cursor: pointer;
     &:hover {
       color: @lambda-times-color-primary;
@@ -37,5 +38,16 @@
   img {
     .width-100();
     display: none;
+    position: absolute;
+    animation: slideLeft 0.5s forwards;
   }
+
+  @keyframes slideLeft {
+    100% { left: 0; }
+  }
+
+  @keyframes slideRight {
+    100% { right: 0; }
+  }
+
 }
